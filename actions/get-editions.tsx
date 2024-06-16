@@ -22,7 +22,7 @@ const getEditions = async (query: Query): Promise<Edition[]> => {
             isFeatured: query.isFeatured,
         },
     })
-    const res = await fetch(URL);
+    const res = await fetch(url);
     return res.json();
 };
 
