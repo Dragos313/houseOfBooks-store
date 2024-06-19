@@ -12,24 +12,33 @@ const Summary = () => {
     const searchParams = useSearchParams();
     const items = useCart(state => state.items);
     const removeAll = useCart(state => state.removeAll);
-    const totalPrice = items.reduce((total, item) => total + Number(item.price), 0)
+    const totalPrice = items.reduce((total, item) => total + Number(item.price), 0);
 
     useEffect(() => {
-        if(searchParams.get('success')) {
+        if (searchParams.get('success')) {
             toast.success("Payment completed.");
             removeAll();
         }
-        if(searchParams.get("canceled")) {
-            toast.error("Something went wrong.")
+        if (searchParams.get("canceled")) {
+            toast.error("Something went wrong.");
         }
-    }, [searchParams, removeAll])
+    }, [searchParams, removeAll]);
 
     const onCheckout = async () => {
-        const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/checkout`, {
-            productIds: items.map(item => item.id),
-        });
+        try {
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/checkout`, {
+                editionIds: items.map(item => item.id), 
+            }, {
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
 
-        window.location = response.data.url
+            window.location.href = response.data.url;
+        } catch (error) {
+            toast.error("Checkout failed.");
+            console.error("Checkout error:", error);
+        }
     }
 
     return ( 
@@ -37,7 +46,7 @@ const Summary = () => {
             <h2 className='text-lg font-medium text-gray-900'>Order Summary</h2>
             <div className='mt-6 space-y-4'>
                 <div className='flex items-center justify-between pt-4 border-t border-gray-200'>
-                    <div className='text-base font-medium text-gray-600'>
+                    <div className='text-base font-medium text-gray-400'>
                         Order Total
                     </div>
                     <Currency value={totalPrice} />
@@ -47,7 +56,7 @@ const Summary = () => {
                 Checkout
             </Button>
         </div>
-     );
+    );
 }
  
 export default Summary;
