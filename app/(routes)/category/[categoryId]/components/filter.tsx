@@ -1,13 +1,13 @@
 "use client";
 
 import {useRouter, useSearchParams} from "next/navigation";
-import {Book, PublishingHouse} from "@/types";
+import {Book, PublishingHouse, Language} from "@/types";
 import qs from "query-string";
 import Button from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 interface FilterProps {
-    data: (Book | PublishingHouse)[];
+    data: (Book | PublishingHouse | Language)[];
     name: string;
     valueKey: string;
 }

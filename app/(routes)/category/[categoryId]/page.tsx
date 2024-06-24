@@ -35,7 +35,7 @@ const CategoryPage: React.FC<CategoryPageProps> = async ({
     });
     const books = await getBooks();
     const publishingHouses = await getPublishingHouses();
-    //const languages = await getLanguages();
+    const languages = await getLanguages();
     const category = await getCategory(params.categoryId);
     return (
         <div className="bg-white">
@@ -43,7 +43,7 @@ const CategoryPage: React.FC<CategoryPageProps> = async ({
                 <Billboard data = {category.billboard}/>
                 <div className="px-4 sm:px-6 lg:px-8 pb-24">
                     <div className="lg:grid lg:grid-cols-5 lg:gap-x-8">
-                        <MobileFilter books={books} publishingHouses={publishingHouses}/>
+                        <MobileFilter books={books} publishingHouses={publishingHouses} languages={languages}/>
                         <div className="hidden lg:block">
                             <Filter
                                 valueKey="bookId"
@@ -54,6 +54,11 @@ const CategoryPage: React.FC<CategoryPageProps> = async ({
                                 valueKey="publishingHouseId"
                                 name="Publishing House"
                                 data={publishingHouses}
+                            />
+                            <Filter
+                                valueKey="languageId"
+                                name="Language"
+                                data={languages}
                             />
                         </div>
                         <div className="mt-6 lg:col-span-4 lg:mt-0">

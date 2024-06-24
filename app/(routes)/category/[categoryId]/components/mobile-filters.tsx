@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import {Book, PublishingHouse} from "@/types";
+import {Book, PublishingHouse, Language} from "@/types";
 import Button from "@/components/ui/button";
 import { Plus, X } from "lucide-react";
 import { Dialog, DialogPanel } from "@headlessui/react";
@@ -12,11 +12,13 @@ import Filter from "./filter";
 interface MobileFilterProps {
     books: Book[];
     publishingHouses: PublishingHouse[];
+    languages: Language[];
 };
 
 const MobileFilter: React.FC<MobileFilterProps> = ({
     books,
-    publishingHouses
+    publishingHouses,
+    languages
 }) => {
     const [open, setOpen] = useState(false);
     const onOpen = () => setOpen(true);
@@ -46,6 +48,11 @@ const MobileFilter: React.FC<MobileFilterProps> = ({
                                 valueKey="publishingHouseId"
                                 name="Publishing House"
                                 data={publishingHouses}
+                            />
+                            <Filter
+                                valueKey="languageId"
+                                name="Language"
+                                data={languages}
                             />
                             </div>
                         </DialogPanel>
