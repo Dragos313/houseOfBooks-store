@@ -4,6 +4,7 @@ import useCart from '@/hooks/use-cart';
 import { ShoppingBag } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { LogIn } from 'lucide-react';
 
 const NavbarActions = () => {
     const [isMounted, setIsMounted] = useState(false)
@@ -26,6 +27,13 @@ const NavbarActions = () => {
                 <ShoppingBag size={20} color='white' />
                 <span className='ml-2 text-sm font-medium text-white'>
                     {cart?.items?.length}
+                </span>
+            </Button>
+            <Button className='flex items-center px-4 py-2 bg-black rounded-full text-white'
+                onClick={() => window.open("http://localhost:3000", "_blank")}>
+                <LogIn size={20} color='white' />
+                <span className='ml-2 text-sm font-medium text-white'>
+                    Login
                 </span>
             </Button>
         </div>

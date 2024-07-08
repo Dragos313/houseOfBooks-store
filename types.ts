@@ -16,6 +16,7 @@ export interface Edition {
     name: string;
     price: string;
     isFeatured: boolean;
+    isAntiquarian: boolean;
     images: Image[];
     book: Book;
     publishingHouse: PublishingHouse;

@@ -21,10 +21,10 @@ const Gallery: React.FC<GalleryProps> = ({
                     ))}
                 </TabList>
             </div>
-            <TabPanels className="aspect-sqaure w-full">
+            <TabPanels className="aspect-[2/3] w-full">
                 {images.map((image) => (
                     <TabPanel key={image.id}>
-                        <div className="aspect-square relative h-full w-full sm:rounded-lg overflow-hidden">
+                        <div className="aspect-[2/3] relative h-full w-full sm:rounded-lg overflow-hidden">
                             <Image
                                 fill
                                 src={image.url}
